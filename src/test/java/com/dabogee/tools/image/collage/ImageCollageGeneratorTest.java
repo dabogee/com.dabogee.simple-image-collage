@@ -54,10 +54,8 @@ public class ImageCollageGeneratorTest {
                         ImageCollageProperties.builder().build()
                 );
 
-        BufferedImage result = generator.concat();
-
 //        ImageIO.write(
-//                result,
+//                generator.concat(),
 //                "jpg",
 //                new File("collage-concat.jpg")
 //        );
