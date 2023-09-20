@@ -25,13 +25,13 @@ public class ImageCollageProperties {
      * Avoiding vertical grey borders (Telegram).
      */
     @Builder.Default
-    private Double minRatio = 1.0;
+    private Double minRatio = 1.15;
 
     /**
      * Number of attempts to put into ratio range.
      */
     @Builder.Default
-    private Integer generateAttempts = 20;
+    private Integer generateAttempts = 50;
 
     @Builder.Default
     private Integer borderWidth = 1;
@@ -41,6 +41,7 @@ public class ImageCollageProperties {
 
     /**
      * Does not look good with this effect on small sizes.
+     * Because hard clip looks ugly on jpeg.
      */
     @Builder.Default
     private Integer cornerRadius = 0;

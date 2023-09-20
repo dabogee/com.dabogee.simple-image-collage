@@ -53,7 +53,7 @@ class ImageCollageRowGenerator {
              */
             BufferedImage cornered =
                     BufferedImageRoundCornerEffect
-                            .of(resized, properties.getCornerRadius())
+                            .of(resized, properties.getCornerRadius(), properties.getBorderColor())
                             .apply();
 
             /*

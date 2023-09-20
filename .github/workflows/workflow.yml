@@ -10,6 +10,14 @@ jobs:
       contents: read
       packages: write
     steps:
+      - uses: actions/delete-package-versions@v3
+        with:
+          owner: 'dabogee'
+          repo: 'com.dabogee.tools.simple-image-collage'
+          package-name: 'com.dabogee.tools.simple-image-collage'
+          token: ${{ secrets.ACCESS_TOKEN }}
+          min-versions-to-keep: 1
+          delete-only-pre-release-versions: "false"
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v3
         with:

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -16,14 +17,16 @@ public class BufferedImageRoundCornerEffect implements BufferedImageEffect {
     private final BufferedImage image;
     private final Integer radius;
 
-    public static BufferedImageRoundCornerEffect of(BufferedImage image, Integer radius) {
+    private final Color color;
+
+    public static BufferedImageRoundCornerEffect of(BufferedImage image, Integer radius, Color color) {
         checkArgument(radius >= 0, "radius should be a positive number");
         CollageImageMeta meta = CollageImageMeta.of(image);
         checkArgument(
                 Math.min(meta.getWidth(), meta.getHeight()) >= radius,
                 "radius is too high"
         );
-        return new BufferedImageRoundCornerEffect(image, radius);
+        return new BufferedImageRoundCornerEffect(image, radius, Optional.ofNullable(color).orElse(Color.WHITE));
     }
 
     @Override
@@ -42,6 +45,8 @@ public class BufferedImageRoundCornerEffect implements BufferedImageEffect {
                 );
 
         Graphics2D g2 = output.createGraphics();
+        g2.setColor(color);
+        g2.fillRect(0, 0, width, height);
 
         RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);

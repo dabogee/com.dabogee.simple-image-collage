@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -19,14 +20,14 @@ public class BufferedImageBorderEffectTest {
 
         BufferedImage modifiedImage =
                 BufferedImageBorderEffect
-                        .of(originImage, 5, Color.WHITE)
+                        .of(originImage, 10, Color.WHITE)
                         .apply();
 
-//        ImageIO.write(
-//                modifiedImage,
-//                "png",
-//                new File("01-bordered.png")
-//        );
+        ImageIO.write(
+                modifiedImage,
+                "png",
+                new File("/Users/dabogee/src/01-bordered.png")
+        );
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         ImageIO.write(modifiedImage, "jpg", os);

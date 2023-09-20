@@ -41,7 +41,7 @@ public class BufferedImageBorderEffect implements BufferedImageEffect {
         graphics.fillRect(0, 0, width, borderWidth);
         graphics.fillRect(0, 0, borderWidth, height);
         graphics.fillRect(width - borderWidth, 0, borderWidth, height);
-        graphics.fillRect(0, height - borderWidth, borderWidth, width);
+        graphics.fillRect(0, height - borderWidth, width, height - borderWidth);
         graphics.dispose();
         return image;
     }
