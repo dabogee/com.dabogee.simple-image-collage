@@ -13,7 +13,7 @@ jobs:
       - uses: actions/delete-package-versions@v3
         with:
           owner: 'dabogee'
-          repo: 'com.dabogee.tools.simple-image-collage'
+          repo: 'com.dabogee.simple-image-collage'
           package-name: 'com.dabogee.tools.simple-image-collage'
           token: ${{ secrets.ACCESS_TOKEN }}
           min-versions-to-keep: 1
