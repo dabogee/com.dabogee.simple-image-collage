@@ -26,6 +26,10 @@ public class CollageInstance {
         return rows.size();
     }
 
+    public boolean isEmpty() {
+        return rows.isEmpty();
+    }
+
     public Double getWidthToHeightRatio() {
         int width = 0;
         int height = 0;

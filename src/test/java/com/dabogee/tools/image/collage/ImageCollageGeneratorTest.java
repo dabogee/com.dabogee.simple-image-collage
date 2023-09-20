@@ -42,7 +42,7 @@ public class ImageCollageGeneratorTest {
                         ImageCollageProperties.builder().build()
                 );
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 50; i++) {
             CollageInstance collageInstance = generator.prepare();
             assertThat(collageInstance.getRowsCount()).isPositive();
         }

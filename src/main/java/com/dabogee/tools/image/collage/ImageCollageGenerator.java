@@ -101,6 +101,7 @@ public class ImageCollageGenerator {
      */
     CollageInstance prepare() {
         CollageInstance result = new CollageInstance();
+        CollageInstance backup = new CollageInstance();
 
         for (int i = 0; i < properties.getGenerateAttempts(); i++) {
             CollageInstance candidate = generate();
@@ -110,13 +111,20 @@ public class ImageCollageGenerator {
             if (ratioDiff > 0 && ratioDiff < resultDiff) {
                 result = candidate;
             }
+
+            if (candidate.getWidthToHeightRatio() < properties.getMaxRatio()) {
+                if (backup.isEmpty()) {
+                    backup = candidate;
+                }
+                else if (candidate.getWidthToHeightRatio() > backup.getWidthToHeightRatio()) {
+                    backup = candidate;
+                }
+            }
         }
 
-        if (result.getRowsCount() == 0) {
-            return generate();
-        }
-
-        return result;
+        return result.isEmpty() ?
+                backup.isEmpty() ? generate() : backup :
+                result;
     }
 
     private CollageInstance generate() {

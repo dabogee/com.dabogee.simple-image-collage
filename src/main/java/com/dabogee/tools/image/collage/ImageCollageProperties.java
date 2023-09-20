@@ -31,7 +31,7 @@ public class ImageCollageProperties {
      * Number of attempts to put into ratio range.
      */
     @Builder.Default
-    private Integer generateAttempts = 50;
+    private Integer generateAttempts = 100;
 
     @Builder.Default
     private Integer borderWidth = 1;
