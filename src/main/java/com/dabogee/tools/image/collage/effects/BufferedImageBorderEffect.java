@@ -2,15 +2,12 @@ package com.dabogee.tools.image.collage.effects;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import org.imgscalr.Scalr;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 import static java.util.Objects.nonNull;
-import static org.imgscalr.Scalr.Mode.FIT_EXACT;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class BufferedImageBorderEffect implements BufferedImageEffect {
@@ -36,27 +33,16 @@ public class BufferedImageBorderEffect implements BufferedImageEffect {
             return image;
         }
 
+        Graphics2D graphics = image.createGraphics();
         int width = image.getWidth();
         int height = image.getHeight();
-
-        BufferedImage result = new BufferedImage(width, height, TYPE_INT_ARGB);
-        Graphics2D graphics = result.createGraphics();
         graphics.setColor(color);
-        graphics.fillRect(0, 0, width, height);
 
-        graphics.drawImage(
-                Scalr.resize(
-                        image,
-                        Scalr.Method.QUALITY,
-                        FIT_EXACT,
-                        width - 2 * borderWidth,
-                        height - 2 * borderWidth
-                ),
-                borderWidth,
-                borderWidth,
-                null
-        );
+        graphics.fillRect(0, 0, width, borderWidth);
+        graphics.fillRect(0, 0, borderWidth, height);
+        graphics.fillRect(width - borderWidth, 0, borderWidth, height);
+        graphics.fillRect(0, height - borderWidth, borderWidth, width);
         graphics.dispose();
-        return result;
+        return image;
     }
 }

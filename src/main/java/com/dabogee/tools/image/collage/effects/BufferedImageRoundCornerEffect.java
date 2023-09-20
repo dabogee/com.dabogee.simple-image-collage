@@ -17,7 +17,7 @@ public class BufferedImageRoundCornerEffect implements BufferedImageEffect {
     private final Integer radius;
 
     public static BufferedImageRoundCornerEffect of(BufferedImage image, Integer radius) {
-        checkArgument(radius > 0, "radius should be a positive number");
+        checkArgument(radius >= 0, "radius should be a positive number");
         CollageImageMeta meta = CollageImageMeta.of(image);
         checkArgument(
                 Math.min(meta.getWidth(), meta.getHeight()) >= radius,
@@ -28,6 +28,10 @@ public class BufferedImageRoundCornerEffect implements BufferedImageEffect {
 
     @Override
     public BufferedImage apply() {
+        if (radius < 1) {
+            return image;
+        }
+
         int width = image.getWidth();
         int height = image.getHeight();
         BufferedImage output =

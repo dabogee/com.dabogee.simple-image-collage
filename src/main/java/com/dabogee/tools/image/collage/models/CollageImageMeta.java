@@ -15,6 +15,8 @@ import static java.util.Objects.nonNull;
 @Accessors(chain = true)
 public class CollageImageMeta {
 
+    private Integer id;
+
     private Integer width;
 
     private Integer height;
@@ -34,7 +36,24 @@ public class CollageImageMeta {
         checkArgument(image.getWidth() > 0, "width should be positive");
         checkArgument(image.getHeight() > 0, "height should be positive");
         return new CollageImageMeta()
+                .setId(image.hashCode())
                 .setWidth(image.getWidth())
                 .setHeight(image.getHeight());
+    }
+
+    public CollageImageMeta fitToHeight(Integer targetHeight) {
+        this.height = targetHeight;
+        this.width = (targetHeight * width) / height;
+        return this;
+    }
+
+    public CollageImageMeta scale(Double ratio) {
+        this.height = (int) (height * ratio);
+        this.width = (int) (width * ratio);
+        return this;
+    }
+
+    public void addWidth(Integer extra) {
+        this.width += extra;
     }
 }

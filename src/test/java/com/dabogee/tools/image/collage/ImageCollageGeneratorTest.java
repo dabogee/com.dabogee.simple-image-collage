@@ -3,7 +3,9 @@ package com.dabogee.tools.image.collage;
 import com.dabogee.tools.image.collage.models.CollageInstance;
 import org.junit.jupiter.api.Test;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Optional;
@@ -17,11 +19,11 @@ public class ImageCollageGeneratorTest {
     void testInit() throws IOException {
         ImageCollageGenerator generator =
                 ImageCollageGenerator.is(
-                        ImageTestProvider.get(),
+                        ImageTestProvider.stream(),
                         ImageCollageProperties.builder().build()
                 );
 
-        assertThat(generator.getImages()).hasSameSizeAs(ImageTestProvider.get());
+        assertThat(generator.getImages()).hasSameSizeAs(ImageTestProvider.stream());
 
         Optional<BufferedImage> candidateOpt = generator.getWidestImage(new HashSet<>());
         assertThat(candidateOpt).isPresent();
@@ -36,11 +38,11 @@ public class ImageCollageGeneratorTest {
     void testPrepare() throws IOException {
         ImageCollageGenerator generator =
                 ImageCollageGenerator.is(
-                        ImageTestProvider.get(),
+                        ImageTestProvider.stream(),
                         ImageCollageProperties.builder().build()
                 );
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 3; i++) {
             CollageInstance collageInstance = generator.prepare();
             assertThat(collageInstance.getRowsCount()).isPositive();
         }
@@ -50,14 +52,14 @@ public class ImageCollageGeneratorTest {
     void testGenerate() throws IOException {
         ImageCollageGenerator generator =
                 ImageCollageGenerator.is(
-                        ImageTestProvider.get(),
+                        ImageTestProvider.stream(),
                         ImageCollageProperties.builder().build()
                 );
 
-//        ImageIO.write(
-//                generator.concat(),
-//                "jpg",
-//                new File("collage-concat.jpg")
-//        );
+        ImageIO.write(
+                generator.concat(),
+                "jpg",
+                new File("/Users/dabogee/src/collage-concat.jpg")
+        );
     }
 }

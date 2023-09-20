@@ -12,12 +12,20 @@ public class CollageImageMetaTest {
     @Test
     void testRead() {
         assertThat(
-                ImageTestProvider.get().stream()
+                ImageTestProvider.stream().stream()
                         .map(CollageImageMeta::of)
                         .collect(Collectors.toList())
         ).allSatisfy(i -> {
             assertThat(i.getWidth()).isPositive();
             assertThat(i.getHeight()).isPositive();
         });
+    }
+
+    @Test
+    void testFitToHeight() {
+        CollageImageMeta meta = new CollageImageMeta().setWidth(640).setHeight(480);
+        CollageImageMeta result = meta.fitToHeight(200);
+        assertThat(result.getHeight()).isEqualTo(200);
+        assertThat(result.getWidth()).isEqualTo(266);
     }
 }

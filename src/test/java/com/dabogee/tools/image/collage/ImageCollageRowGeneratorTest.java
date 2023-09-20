@@ -3,7 +3,9 @@ package com.dabogee.tools.image.collage;
 import com.dabogee.tools.image.collage.models.CollageInstance;
 import org.junit.jupiter.api.Test;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class ImageCollageRowGeneratorTest {
@@ -14,7 +16,7 @@ public class ImageCollageRowGeneratorTest {
                 ImageCollageProperties.builder().build();
 
         ImageCollageGenerator generator =
-                ImageCollageGenerator.is(ImageTestProvider.get(), properties);
+                ImageCollageGenerator.is(ImageTestProvider.stream(), properties);
 
         CollageInstance collageInstance = generator.prepare();
 
@@ -26,10 +28,10 @@ public class ImageCollageRowGeneratorTest {
 
         BufferedImage result = rowGenerator.concat(properties);
 
-//        ImageIO.write(
-//                result,
-//                "jpg",
-//                new File("row-concat.jpg")
-//        );
+        ImageIO.write(
+                result,
+                "jpg",
+                new File("/Users/dabogee/src/row-concat.jpg")
+        );
     }
 }

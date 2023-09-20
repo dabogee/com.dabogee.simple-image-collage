@@ -25,4 +25,14 @@ public class CollageInstance {
     public Integer getRowsCount() {
         return rows.size();
     }
+
+    public Double getWidthToHeightRatio() {
+        int width = 0;
+        int height = 0;
+        for (CollageRow row : rows) {
+            width = Math.max(row.getTotalWidth(), width);
+            height += row.getMinHeight();
+        }
+        return height == 0 ? Integer.MAX_VALUE : width / (double) height;
+    }
 }

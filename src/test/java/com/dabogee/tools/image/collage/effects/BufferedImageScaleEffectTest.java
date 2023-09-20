@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,7 +15,7 @@ public class BufferedImageScaleEffectTest {
 
     @Test
     void testApply() throws IOException {
-        BufferedImage originImage = ImageIO.read(ImageTestProvider.get().get(2));
+        BufferedImage originImage = ImageIO.read(ImageTestProvider.stream().get(2));
 
         BufferedImage modifiedImage =
                 BufferedImageScaleEffect

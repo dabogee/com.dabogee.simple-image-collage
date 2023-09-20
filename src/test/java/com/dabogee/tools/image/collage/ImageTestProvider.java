@@ -1,6 +1,11 @@
 package com.dabogee.tools.image.collage;
 
+import lombok.SneakyThrows;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,19 +21,28 @@ public class ImageTestProvider {
                     "09.jpeg", "10.jpeg", "11.jpeg", "12.jpeg"
             );
 
-    public static List<InputStream> get() {
+    public static List<InputStream> stream() {
         ClassLoader cl = ImageTestProvider.class.getClassLoader();
         return FILENAMES.stream()
                 .map(fn -> cl.getResourceAsStream(DIR + fn))
                 .collect(Collectors.toList());
     }
 
-    public static InputStream get(String filename) {
+    @SneakyThrows
+    public static List<BufferedImage> images() {
+        List<BufferedImage> result = new ArrayList<>();
+        for (InputStream is : stream()) {
+            result.add(ImageIO.read(is));
+        }
+        return result;
+    }
+
+    public static InputStream stream(String filename) {
         return ImageTestProvider.class.getClassLoader().getResourceAsStream(DIR + filename);
     }
 
     public static void main(String[] args) {
-        assertThat(ImageTestProvider.get())
+        assertThat(ImageTestProvider.stream())
                 .isNotEmpty()
                 .allSatisfy(is -> assertThat(is).isNotEmpty());
     }

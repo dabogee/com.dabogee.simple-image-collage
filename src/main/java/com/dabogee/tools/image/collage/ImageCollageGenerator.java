@@ -100,6 +100,26 @@ public class ImageCollageGenerator {
      * Organize a collage row-by-row.
      */
     CollageInstance prepare() {
+        CollageInstance result = new CollageInstance();
+
+        for (int i = 0; i < properties.getGenerateAttempts(); i++) {
+            CollageInstance candidate = generate();
+            double ratioDiff = candidate.getWidthToHeightRatio() - properties.getMinRatio();
+            double resultDiff = result.getWidthToHeightRatio() - properties.getMinRatio();
+
+            if (ratioDiff > 0 && ratioDiff < resultDiff) {
+                result = candidate;
+            }
+        }
+
+        if (result.getRowsCount() == 0) {
+            return generate();
+        }
+
+        return result;
+    }
+
+    private CollageInstance generate() {
         CollageInstance collage = new CollageInstance();
         Set<Integer> usedIds = collage.getUsedIds();    // optimization
 
@@ -116,7 +136,7 @@ public class ImageCollageGenerator {
                 if (imageOpt.isEmpty()) {
                     break;
                 }
-                row.put(imageOpt.get().hashCode());
+                row.put(imageOpt.get());
             }
             else {
                 for (int i = 0; i < randomImagesInRowCount; i++) {
@@ -124,16 +144,16 @@ public class ImageCollageGenerator {
                     if (imageIdOpt.isEmpty()) {
                         break;
                     }
-                    row.put(imageIdOpt.get());
+                    row.put(images.get(imageIdOpt.get()));
                     usedIds.add(imageIdOpt.get());
                 }
             }
 
-            if (CollectionUtils.isEmpty(row.getIds())) {
+            if (row.getImages().isEmpty()) {
                 break;
             }
 
-            collage.add(row);
+            collage.add(row.transform(properties));
             usedIds = collage.getUsedIds();
         }
 
