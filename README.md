@@ -5,8 +5,8 @@ Generates a random collage from given images.
 
 ### Examples
 <div style="clear: both; margin: 20px 0;">
-<img src="./docs/collage-example-01.jpg" width="350" style="margin-left: 20px; float: left;" />
-<img src="./docs/collage-example-02.jpg" width="350" style="float: left;" />
+<img src="https://github.com/dabogee/com.dabogee.simple-image-collage/blob/master/docs/collage-example-01.jpg" width="350" style="margin-left: 20px; float: left;" />
+<img src="https://github.com/dabogee/com.dabogee.simple-image-collage/blob/master/docs/collage-example-01.jpg" width="350" style="float: left;" />
 </div>
 
 <div style="clear: both; margin: 20px 0;">
