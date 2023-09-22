@@ -2,11 +2,11 @@
 
 Note:
 
-Sorry, I didn't have enough time to publish it to maven central repository but if you can help me with this task, please, make a PR about it.
+Sorry, I didn't have enough time to publish it to the maven central repository but if you can help me with this task, please, make a PR about it.
 
 ### Description
 
-Generates a random collage from given images.
+Generates a random collage from a set of given images.
 
 
 
