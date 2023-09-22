@@ -19,8 +19,70 @@ Generates a random collage from given images.
 <div style="clear: both; margin: 20px 0;">
 <img src="./docs/collage-example-06.jpg" width="350" />
 </div>
+<p>&nbsp;</p>
 
+### Usage
+```java
+// Constructors
+ImageCollageGenerator.files(List<File>, ImageCollageProperties)
+ImageCollageGenerator.is(List<InputStream>, ImageCollageProperties)
+ImageCollageGenerator.images(List<BufferedImage>, ImageCollageProperties)
+  
+// Example
+ByteArrayOutputStream os = new ByteArrayOutputStream();
+ImageIO.write(ImageCollageGenerator.is(streams, props).concat(), "jpeg", os);
+```
+```java
+// Properties
+/**
+ * Total width of a result image.
+ */
+private Integer maxWidth = 600;
 
+/**
+ * width / height.
+ * Avoiding horizontal grey borders (Telegram).
+ */
+private Double maxRatio = 5.0;
+
+/**
+ * width / height.
+ * Avoiding vertical grey borders (Telegram).
+ */
+private Double minRatio = 1.15;
+
+/**
+ * Number of attempts to generate a collage
+ * which fits into ratio range.
+ */
+private Integer generateAttempts = 100;
+
+/**
+ * Border props.
+ */
+private Integer borderWidth = 1;
+private Color borderColor = Color.WHITE;
+
+/**
+ * Does not look good with this effect on small sizes.
+ * Because hard clip looks ugly on jpeg.
+ */
+private Integer cornerRadius = 0;
+
+private Integer minImagesPerRow = 1;
+private Integer maxImagesPerRow = 4;
+
+private Integer maxRows = 5;
+
+```
+### maxRatio and minRatio.
+Those parameters are used to avoid too tight and too tall images like mentioned below where extra space is marked in red.
+<div style="clear: both; margin: 20px 0;">
+<img src="./docs/tight-collage-01.jpg" width="350" />
+<p>&nbsp;</p>
+<img src="./docs/tall-collage-01.jpg" width="350" />
+</div>
+<p>&nbsp;</p>
 
 ### Setup repository
 
