@@ -17,8 +17,7 @@ Generates a random collage from given images.
 <p>&nbsp;</p>
 
 <div style="clear: both; margin: 20px 0;">
-<img src="./docs/collage-example-05.jpg" width="350" style="margin-left: 20px; float: left;" />
-<img src="./docs/collage-example-06.jpg" width="350" style="float: left;" />
+<img src="./docs/collage-example-06.jpg" width="350" />
 </div>
 
 
