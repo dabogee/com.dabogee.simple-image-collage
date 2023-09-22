@@ -1,7 +1,14 @@
 # com.dabogee.simple-image-collage
 
+Note:
+
+Sorry, I didn't have enough time to publish it to maven central repository but if you can help me with this task, please, make a PR about it.
+
 ### Description
+
 Generates a random collage from given images.
+
+
 
 ### Examples
 <div style="clear: both; margin: 20px 0;">
@@ -75,8 +82,9 @@ private Integer maxImagesPerRow = 4;
 private Integer maxRows = 5;
 
 ```
-### maxRatio and minRatio.
-Those parameters are used to avoid too tight and too tall images like mentioned below where extra space is marked in red.
+### MaxRatio and minRatio parameters
+**MaxRatio** and **minRatio** are used to avoid too tight and too tall images like mentioned below where extra space is marked in red. If you don't have any limitations in image/collage height-width ratio then you can play with those settings.
+
 <div style="clear: both; margin: 20px 0;">
 <img src="./docs/tight-collage-01.jpg" width="350" />
 <p>&nbsp;</p>
